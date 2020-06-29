@@ -1,13 +1,14 @@
 const express = require('express')
 const app = express()
+const db = require('./db')
 const port = 3000
 
-let students = [
-    { name: "Sally Struthers", studentId: 1, grades: ["A", "B", "C"] },
-    { name: "Gunther", studentId: 2, grades: ["Q", "Q"] },
-    { name: "Sammy Sossa", studentId: 3, grades: ["Z", "Z","Z"]
-}
-];
+// let students = [
+//     { name: "Sally Struthers", studentId: 1, grades: ["A", "B", "C"] },
+//     { name: "Gunther", studentId: 2, grades: ["Q", "Q"] },
+//     { name: "Sammy Sossa", studentId: 3, grades: ["Z", "Z","Z"]
+// }
+// ];
 
     app.use(express.json());
 
@@ -19,21 +20,28 @@ app.get('/', (req, res) => {
 app.get('/students', (req, res) => {
     let search = req.query.search;
     if (search) {
-        let foundStudents = [];
-        students.forEach(student => {
-            if (student.name.includes(search)) {
-                foundStudents.push(student);
+            db.query(`SELECT * FROM students WHERE name LIKE '%${search}%'`, (err, results) => {
+            if(err){
+                res.status(500).end()
+            } else {
+                res.status(200).json(results.rows)
             }
         })
-        res.send(foundStudents);
     }
     else
     {
-        res.send(students);
+        db.query(`SELECT * FROM students`, (err, results) => {
+            if(err){
+                res.status(500).end()
+            } else {
+                res.status(200).json(results.rows)
+            }
+        });
     }
 })
 
 app.get('/students/:studentId', (req, res) => {
+    //db.query(`SELECT * FROM students WHERE studentId = ${req.params.studentId}`, (err, results) => {
     let foundStudent = students.find(student =>  student.studentId === Number.parseInt(req.params.studentId));
         res.send(foundStudent);
 })

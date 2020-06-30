@@ -1,12 +1,13 @@
 CREATE TABLE students (
-studentId INT,
+studentId serial PRIMARY KEY,
 name VARCHAR (255),
-grades VARCHAR (255)
+grades VARCHAR (255),
+email VARCHAR (255)
 );
 
 INSERT INTO students 
-(studentId, name, grades) 
+(name, grades, email) 
 VALUES 
-(1, 'Sally Struthers', 'A, B, C'),
-(2, 'Gunther', 'Q, Q'),
-(3, 'Sammy Sossa', 'Z, Z, Z');
+('Sally Struthers', 'A, B, C', 'SaveTehChildren@SharkLasers.com'),
+('Gunther', 'Q, Q', 'GuntherAndTheSunshineGirls@aol.com'),
+('Sammy Sossa', 'Z, Z, Z', 'Samosa@hey.com');

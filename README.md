@@ -1,4 +1,10 @@
-﻿# RestfulApi
+﻿# RestfulApi With Persistence
+ 
+Todos: 
+Make a docker compose file
+Use Routers so all the code isn't jammed in index
+
+Instructions
 
 pull down this repo navigate to the folder from this repo and enter:
 

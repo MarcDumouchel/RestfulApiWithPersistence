@@ -1,6 +1,7 @@
 ﻿# RestfulApi
 
 pull down this repo navigate to the folder from this repo and enter:
+
 docker build -t studentsdb/devdb .
 docker run -i -p 5434:5432 --name studentsDb studentsdb/devdb
 
